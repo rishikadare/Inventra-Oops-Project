@@ -44,3 +44,4 @@ inventra.exe
 
 ## Note
 The browser dashboard and C++ console program are two demonstrations of the same project theme. The HTML dashboard is a front-end demo and does not call the C++ executable as a web server.
+Your site is live at https://rishikadare.github.io/Inventra-Oops-Project/
