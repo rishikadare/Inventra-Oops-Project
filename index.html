@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>INVENTRA | Inventory Management</title>
+<style>
+:root{--bg:#0b1020;--panel:#111a2e;--panel2:#16213a;--line:#263451;--text:#edf2ff;--muted:#8fa0bf;--accent:#8b7cff;--cyan:#42d6cf;--red:#ff7185;--yellow:#f6c86a;--green:#5bd6a2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#1c2450 0,transparent 32%),var(--bg);color:var(--text);font:14px Inter,system-ui,Segoe UI,sans-serif}
+.app{display:flex;min-height:100vh}.sidebar{width:235px;background:#0d1426;border-right:1px solid var(--line);padding:25px 17px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:800;letter-spacing:1px;margin:0 8px 38px}.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:grid;place-items:center;color:#09101e;font-weight:900}
+.navlabel{color:#627392;font-size:10px;font-weight:800;letter-spacing:1.7px;margin:0 10px 12px}.nav{display:flex;align-items:center;gap:12px;padding:12px 13px;color:var(--muted);border-radius:10px;margin:3px 0;cursor:pointer}.nav.active,.nav:hover{background:#20294a;color:#fff}.nav.active{box-shadow:inset 3px 0 var(--accent)}.sidebottom{margin-top:auto;color:#6f809f;font-size:12px;padding:12px}
+main{flex:1;padding:30px 36px;max-width:1500px;margin:auto;width:100%}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:1.8px}.top h1{font-size:26px;margin:6px 0}.sub{color:var(--muted)}.user{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);padding:8px 12px;border-radius:13px}.avatar{width:31px;height:31px;border-radius:50%;background:#342f68;display:grid;place-items:center;color:#c9c3ff;font-weight:800}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px}.card,.panel{background:linear-gradient(145deg,#141e35,#10182b);border:1px solid var(--line);border-radius:16px}.card{padding:18px}.cardtop{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.ico{width:34px;height:34px;border-radius:10px;background:#292754;color:#b8b0ff;display:grid;place-items:center;font-size:17px}.value{font-size:27px;font-weight:800;margin:14px 0 5px}.hint{font-size:11px;color:var(--muted)}.positive{color:var(--green)}.warning{color:var(--yellow)}.negative{color:var(--red)}
+.content{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,.8fr);gap:16px}.panel{padding:20px}.panelhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.panel h2{font-size:16px;margin:0}.muted{color:var(--muted)}.btn{border:0;border-radius:9px;padding:10px 14px;background:linear-gradient(120deg,var(--accent),#6d8bff);color:white;font-weight:700;cursor:pointer}.btn:hover{filter:brightness(1.12)}.btn.ghost{background:#202b47;border:1px solid var(--line);color:#dce5ff}.toolbar{display:flex;gap:9px;margin-bottom:14px}.search{flex:1;min-width:100px;background:#0b1325;border:1px solid var(--line);border-radius:9px;padding:10px 12px;color:white;outline:none}.search:focus{border-color:var(--accent)}
+table{width:100%;border-collapse:collapse;text-align:left}th{font-size:10px;color:#7183a5;letter-spacing:1px;font-weight:800;padding:11px 9px;border-bottom:1px solid var(--line)}td{padding:13px 9px;border-bottom:1px solid #202c45;color:#dce5f7;font-size:12px}tr:last-child td{border:0}.product{display:flex;align-items:center;gap:10px}.producticon{width:34px;height:34px;border-radius:9px;background:#222e4d;display:grid;place-items:center}.pill{padding:5px 8px;border-radius:20px;font-size:10px;font-weight:700}.in{background:#123b35;color:var(--green)}.low{background:#45371c;color:var(--yellow)}.out{background:#482330;color:var(--red)}.actions button{background:none;border:0;color:#9caed0;cursor:pointer;font-size:15px}.alerts{display:grid;gap:10px}.alert{display:flex;gap:11px;padding:12px;background:#111b30;border:1px solid #263451;border-radius:11px}.dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);margin-top:5px;flex:none}.alert strong{font-size:12px}.alert p{font-size:11px;color:var(--muted);margin:4px 0 0}.barrow{margin:15px 0}.barlabel{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-bottom:7px}.bar{height:7px;background:#263451;border-radius:10px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:10px}
+.modal{position:fixed;inset:0;background:#050914c9;display:none;place-items:center;padding:18px}.modal.show{display:grid}.dialog{width:min(430px,100%);background:#121d33;border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:0 20px 70px #0008}.dialog h2{margin:0 0 18px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:11px;color:var(--muted)}.field input,.field select{background:#0b1325;border:1px solid var(--line);padding:11px;border-radius:8px;color:white}.formactions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}.empty{text-align:center;color:var(--muted);padding:30px}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}.content{grid-template-columns:1fr}.sidebar{width:190px}main{padding:24px}}
+@media(max-width:650px){.sidebar{width:62px;padding:18px 8px}.brand{margin:0 4px 30px}.brand span,.nav span,.navlabel,.sidebottom{display:none}.nav{justify-content:center;padding:13px 5px}.top{align-items:flex-start}.user{display:none}main{padding:20px 13px}.cards{gap:9px}.card{padding:13px}.value{font-size:22px}.panel{padding:13px;overflow:auto}table{min-width:560px}.top h1{font-size:22px}}
+</style></head>
+<body><div class="app">
+<aside class="sidebar"><div class="brand"><div class="logo">I</div><span>INVENTRA</span></div><div class="navlabel">WORKSPACE</div>
+<div class="nav active"><span>▦</span><span>Dashboard</span></div><div class="nav"><span>▤</span><span>Inventory</span></div><div class="nav"><span>⇄</span><span>Stock Movement</span></div><div class="nav"><span>♧</span><span>Suppliers</span></div><div class="nav"><span>▧</span><span>Reports</span></div><div class="sidebottom">OOPS Mini Project · C++</div></aside>
+<main><header class="top"><div><div class="eyebrow">OVERVIEW / INVENTORY</div><h1>Inventory Dashboard</h1><div class="sub">Track your stock. Stay in control.</div></div><div class="user"><div class="avatar">A</div><div><b>Admin</b><div class="muted" style="font-size:10px">Administrator</div></div></div></header>
+<section class="cards">
+<div class="card"><div class="cardtop">Total Products <span class="ico">▦</span></div><div class="value" id="total">08</div><div class="hint positive">Products in catalogue</div></div>
+<div class="card"><div class="cardtop">Total Units <span class="ico">▤</span></div><div class="value" id="units">1,284</div><div class="hint">Across all products</div></div>
+<div class="card"><div class="cardtop">Low Stock Items <span class="ico">⚠</span></div><div class="value warning" id="lowcount">02</div><div class="hint">Below reorder level</div></div>
+<div class="card"><div class="cardtop">Inventory Value <span class="ico">₹</span></div><div class="value" id="value">₹4.82L</div><div class="hint">Estimated stock value</div></div>
+</section>
+<section class="content"><div class="panel"><div class="panelhead"><h2>Product Inventory</h2><button class="btn" onclick="openModal()">＋ Add Product</button></div><div class="toolbar"><input class="search" id="search" placeholder="Search product or category..." oninput="render()"><button class="btn ghost" onclick="resetData()">Reset Demo</button></div>
+<table><thead><tr><th>PRODUCT</th><th>SKU</th><th>QUANTITY</th><th>PRICE</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div style="display:grid;gap:16px"><div class="panel"><div class="panelhead"><h2>Stock Alerts</h2><span class="muted">Live</span></div><div class="alerts" id="alerts"></div></div>
+<div class="panel"><div class="panelhead"><h2>Stock Distribution</h2><span class="muted">By category</span></div><div id="distribution"></div></div></div></section>
+</main></div>
+<div class="modal" id="modal"><div class="dialog"><h2 id="modalTitle">Add Product</h2><input id="editId" type="hidden">
+<div class="field"><label>Product name</label><input id="name" placeholder="e.g. Wireless Mouse"></div><div class="field"><label>SKU</label><input id="sku" placeholder="e.g. ACC-001"></div><div class="field"><label>Category</label><select id="category"><option>Electronics</option><option>Accessories</option><option>Stationery</option><option>Furniture</option><option>Other</option></select></div><div class="field"><label>Quantity</label><input id="qty" type="number" min="0" placeholder="0"></div><div class="field"><label>Unit price (₹)</label><input id="price" type="number" min="0" placeholder="0"></div><div class="formactions"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn" onclick="saveProduct()">Save Product</button></div></div></div>
+<script>
+const seed=[
+{id:1,name:"Wireless Mouse",sku:"EL-001",category:"Electronics",qty:145,price:799},
+{id:2,name:"Mechanical Keyboard",sku:"EL-002",category:"Electronics",qty:82,price:2499},
+{id:3,name:"USB-C Hub",sku:"AC-014",category:"Accessories",qty:12,price:1299},
+{id:4,name:"HD Monitor 24”",sku:"EL-008",category:"Electronics",qty:34,price:8999},
+{id:5,name:"Notebook A4",sku:"ST-021",category:"Stationery",qty:8,price:65},
+{id:6,name:"Office Chair",sku:"FU-003",category:"Furniture",qty:26,price:5499},
+{id:7,name:"Webcam 1080p",sku:"EL-012",category:"Electronics",qty:0,price:1899},
+{id:8,name:"Desk Lamp",sku:"AC-031",category:"Accessories",qty:63,price:999}
+];
+let products=JSON.parse(localStorage.getItem("inventra-products")||"null")||seed;
+function persist(){localStorage.setItem("inventra-products",JSON.stringify(products))}
+function status(p){return p.qty===0?["Out of stock","out"]:p.qty<20?["Low stock","low"]:["In stock","in"]}
+function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
+function render(){
+const q=(document.getElementById("search").value||"").toLowerCase(), shown=products.filter(p=>(p.name+" "+p.category+" "+p.sku).toLowerCase().includes(q));
+document.getElementById("rows").innerHTML=shown.length?shown.map(p=>{let s=status(p);return `<tr><td><div class="product"><div class="producticon">▣</div><b>${esc(p.name)}</b></div></td><td>${esc(p.sku)}</td><td>${p.qty}</td><td>${money(p.price)}</td><td><span class="pill ${s[1]}">${s[0]}</span></td><td class="actions"><button title="Edit" onclick="editProduct(${p.id})">✎</button> <button title="Delete" onclick="deleteProduct(${p.id})">✕</button></td></tr>`}).join(""):'<tr><td colspan="6" class="empty">No products found.</td></tr>';
+document.getElementById("total").textContent=products.length.toString().padStart(2,"0");
+document.getElementById("units").textContent=products.reduce((a,p)=>a+p.qty,0).toLocaleString("en-IN");
+document.getElementById("lowcount").textContent=products.filter(p=>p.qty<20).length.toString().padStart(2,"0");
+let val=products.reduce((a,p)=>a+p.qty*p.price,0);document.getElementById("value").textContent=val>=100000?(val/100000).toFixed(2)+"L":money(val);
+let low=products.filter(p=>p.qty<20);document.getElementById("alerts").innerHTML=low.length?low.map(p=>`<div class="alert"><div class="dot" style="background:${p.qty===0?'var(--red)':'var(--yellow)'}"></div><div><strong>${esc(p.name)} · ${p.qty===0?'Out of stock':'Only '+p.qty+' left'}</strong><p>${esc(p.sku)} · ${esc(p.category)}</p></div></div>`).join(""):'<div class="muted">All products are above reorder level.</div>';
+let cats={};products.forEach(p=>cats[p.category]=(cats[p.category]||0)+p.qty);let max=Math.max(1,...Object.values(cats));document.getElementById("distribution").innerHTML=Object.entries(cats).map(([k,v])=>`<div class="barrow"><div class="barlabel"><span>${esc(k)}</span><b>${v} units</b></div><div class="bar"><div class="fill" style="width:${v/max*100}%"></div></div></div>`).join("");
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function openModal(p){document.getElementById("modal").classList.add("show");document.getElementById("modalTitle").textContent=p?"Edit Product":"Add Product";document.getElementById("editId").value=p?.id||"";["name","sku","qty","price"].forEach(k=>document.getElementById(k).value=p?.[k]??"");document.getElementById("category").value=p?.category||"Electronics"}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function saveProduct(){let name=document.getElementById("name").value.trim(),sku=document.getElementById("sku").value.trim(),qty=Number(document.getElementById("qty").value),price=Number(document.getElementById("price").value),id=Number(document.getElementById("editId").value);if(!name||!sku||document.getElementById("qty").value===""||document.getElementById("price").value===""||qty<0||price<0){alert("Please enter valid product details.");return}if(products.some(p=>p.sku.toLowerCase()===sku.toLowerCase()&&p.id!==id)){alert("SKU already exists.");return}let p={id:id||Date.now(),name,sku,category:document.getElementById("category").value,qty,price};if(id)products=products.map(x=>x.id===id?p:x);else products.push(p);persist();render();closeModal()}
+function editProduct(id){openModal(products.find(p=>p.id===id))}
+function deleteProduct(id){let p=products.find(x=>x.id===id);if(confirm("Delete "+p.name+"?")){products=products.filter(x=>x.id!==id);persist();render()}}
+function resetData(){if(confirm("Restore the original demo inventory?")){products=seed.map(x=>({...x}));persist();render()}}
+render();
+</script></body></html>
